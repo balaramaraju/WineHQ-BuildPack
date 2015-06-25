@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 echo "Install WineHQ"
-sudo add-apt-repository ppa:ubuntu-wine/ppa
+add-apt-repository ppa:ubuntu-wine/ppa
 echo "Update"
-sudo apt-get update
+apt-get update
 echo "Load Custom Frameworks"
 echo "Done"
