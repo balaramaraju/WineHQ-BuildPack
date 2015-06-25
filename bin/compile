@@ -8,6 +8,6 @@ tar -xjvf wine-1.7.20.tar.bz2 && cd wine-1.7.*
 cd tools
 ./wineinstall
 echo "Update"
-apt-get update
+
 echo "Load Custom Frameworks"
 echo "Done"
