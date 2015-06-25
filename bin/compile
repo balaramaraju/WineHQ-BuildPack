@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+echo "Install WineHQ"
+echo "Load Custom Frameworks"
+echo "Done"
