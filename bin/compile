@@ -6,7 +6,7 @@ tar -xjvf wine-1.7.*
 cd wine-1.7.*
 ./configure
 cd tools
-./wineinstal
+./wineinstall
 echo "Update"
 apt-get update
 echo "Load Custom Frameworks"
