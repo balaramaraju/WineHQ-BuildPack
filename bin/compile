@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
 echo "Install WineHQ"
-wget http://prdownloads.sourceforge.net/wine/wine-1.7.20.tar.bz2
-tar -xjvf wine-1.7.20.tar.bz2 && cd wine-1.7.*
-
-./configure --enable-win64
+#wget http://prdownloads.sourceforge.net/wine/wine-1.7.20.tar.bz2
+#tar -xjvf wine-1.7.20.tar.bz2 && cd wine-1.7.*
+apt-get install wine1.7
+#./configure --enable-win64
 cd tools
-echo yes |./wineinstall
+#echo yes |./wineinstall
 echo "Update"
 
 echo "Load Custom Frameworks"
