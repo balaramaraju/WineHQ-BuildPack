@@ -7,7 +7,7 @@ add-apt-repository ppa:ubuntu-wine/ppa
 apt-get update
 apt-get install wine1.7
 #./configure --enable-win64
-cd tools
+#cd tools
 #echo yes |./wineinstall
 echo "Update"
 
