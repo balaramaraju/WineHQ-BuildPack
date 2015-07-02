@@ -42,7 +42,7 @@ topic "Updating apt caches"
 
 
 
-mkdir -p $BUILD_DIR/.apt
+mkdir -p $BUILD_DIR/apt
 
 	topic "Installing WineHQ"
 	topic " --> Downloading the packages"
@@ -73,12 +73,12 @@ mkdir -p $BUILD_DIR/.apt
 
 	
 	topic "--> Setting the paths <yet to implement Configurations>"
-	export PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/wine-unstable/bin:$PATH"
+	export PATH="\$HOME/apt/usr/lib/x86_64-linux-gnu/wine-unstable/bin:$PATH"
 
 
 	topic "Basic Wine installation is done"
 
-	$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/wine-unstable/bin/wine --version
+	$BUILD_DIR/apt/usr/lib/x86_64-linux-gnu/wine-unstable/bin/wine --version
 
 	topic "install wine tricks pending"
 	rm -f winetricks
@@ -87,5 +87,6 @@ mkdir -p $BUILD_DIR/.apt
 
 echo $BUILD_DIR
 echo $PATH
+ls
 topic "Install VC Runtime 2010"
 
