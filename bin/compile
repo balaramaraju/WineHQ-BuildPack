@@ -85,6 +85,7 @@ mkdir -p $BUILD_DIR/.apt
 	wget http://winetricks.org/winetricks
 	chmod +x winetricks
 
-
+echo $BUILD_DIR
+echo $PATH
 topic "Install VC Runtime 2010"
 
