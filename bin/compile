@@ -1,15 +1,90 @@
 #!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
 
-echo "Install WineHQ"
-#wget http://prdownloads.sourceforge.net/wine/wine-1.7.20.tar.bz2
-#tar -xjvf wine-1.7.20.tar.bz2 && cd wine-1.7.*
-add-apt-repository ppa:ubuntu-wine/ppa
-apt-get update
-apt-get install wine1.7
-#./configure --enable-win64
-#cd tools
-#echo yes |./wineinstall
-echo "Update"
+# fail fast
+set -e
 
-echo "Load Custom Frameworks"
-echo "Done"
+# debug
+ set -x
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+
+function error() {
+  echo " !     $*" >&2
+  exit 1
+}
+
+function topic() {
+  echo "-----> $*"
+}
+
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
+
+APT_CACHE_DIR="$CACHE_DIR/apt/cache"
+APT_STATE_DIR="$CACHE_DIR/apt/state"
+
+mkdir -p "$APT_CACHE_DIR/archives/partial"
+mkdir -p "$APT_STATE_DIR/lists/partial"
+
+APT_OPTIONS="-o debug::nolocking=true -o dir::cache=$APT_CACHE_DIR -o dir::state=$APT_STATE_DIR"
+
+topic "Updating apt caches"
+#apt-get $APT_OPTIONS update | indent
+
+
+
+mkdir -p $BUILD_DIR/.apt
+
+	topic "Installing WineHQ"
+	topic " --> Downloading the packages"
+	wget http://dev.carbon-project.org/debian/wine-unstable/libwine-dev-unstable_1.7.15-0.1_amd64.deb
+	wget http://dev.carbon-project.org/debian/wine-unstable/libwine-unstable_1.7.15-0.1_amd64.deb
+	wget http://dev.carbon-project.org/debian/wine-unstable/wine64-dev-tools-unstable_1.7.15-0.1_amd64.deb
+	wget http://dev.carbon-project.org/debian/wine-unstable/wine64-unstable_1.7.15-0.1_amd64.deb
+
+	#wget http://dev.carbon-project.org/debian/wine-unstable/libwine-dbg-unstable_1.7.15-0.1_i386.deb
+	#wget http://dev.carbon-project.org/debian/wine-unstable/libwine-dev-unstable_1.7.15-0.1_i386.deb
+	#wget http://dev.carbon-project.org/debian/wine-unstable/libwine-unstable_1.7.15-0.1_i386.deb
+	#wget http://dev.carbon-project.org/debian/wine-unstable/wine-unstable_1.7.15-0.1_i386.deb
+	#wget http://dev.carbon-project.org/debian/wine-unstable/wine32-dev-tools-unstable_1.7.15-0.1_i386.deb
+	#wget http://dev.carbon-project.org/debian/wine-unstable/wine32-unstable_1.7.15-0.1_i386.deb
+
+	topic " --> extracting the packages"
+	dpkg -x ./libwine-dev-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
+	dpkg -x ./libwine-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
+	dpkg -x ./wine64-dev-tools-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
+	dpkg -x ./wine64-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
+
+	#dpkg -x ./libwine-dbg-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
+	#dpkg -x ./libwine-dev-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
+	#dpkg -x ./libwine-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
+	#dpkg -x ./wine-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
+	#dpkg -x ./wine32-dev-tools-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
+	#dpkg -x ./wine32-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
+
+	
+	topic "--> Setting the paths <yet to implement Configurations>"
+	export PATH="\$HOME/.apt/usr/lib/x86_64-linux-gnu/wine-unstable/bin:$PATH"
+
+
+	topic "Basic Wine installation is done"
+
+	$BUILD_DIR/.apt/usr/lib/x86_64-linux-gnu/wine-unstable/bin/wine --version
+
+	topic "install wine tricks pending"
+	rm -f winetricks
+	wget http://winetricks.org/winetricks
+	chmod +x winetricks
+
+
+topic "Install VC Runtime 2010"
+
