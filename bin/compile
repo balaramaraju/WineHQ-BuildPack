@@ -59,10 +59,10 @@ mkdir -p $BUILD_DIR/apt
 	#wget http://dev.carbon-project.org/debian/wine-unstable/wine32-unstable_1.7.15-0.1_i386.deb
 
 	topic " --> extracting the packages"
-	dpkg -x ./libwine-dev-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
-	dpkg -x ./libwine-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
-	dpkg -x ./wine64-dev-tools-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
-	dpkg -x ./wine64-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/.apt/
+	dpkg -x ./libwine-dev-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/apt/
+	dpkg -x ./libwine-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/apt/
+	dpkg -x ./wine64-dev-tools-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/apt/
+	dpkg -x ./wine64-unstable_1.7.15-0.1_amd64.deb $BUILD_DIR/apt/
 
 	#dpkg -x ./libwine-dbg-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
 	#dpkg -x ./libwine-dev-unstable_1.7.15-0.1_i386.deb $BUILD_DIR/.apt/
